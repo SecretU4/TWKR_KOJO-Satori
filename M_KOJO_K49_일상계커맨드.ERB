@@ -788,13 +788,22 @@ IF LOCAL
             PRINTFORML 「어차피 그럴듯한 말로 꼬실때나 써먹으려는거 아닌가요?」
             PRINTFORMW 틀린말은 아니네라고 속으로 투덜거리자 특유의 비웃음을 보내고 있다...
         ELSEIF TALENT:연인 || TALENT:연모 || TALENT:사모 ; || TALENT:애욕 || TALENT:섹프
-            ;함락 소질이 있을 때
-            PRINTFORML 사토리의 서툴지만 열정적인 지도를 경청했다.
-            PRINTFORML 그러다 사토리가 불쑥 손을 내민다.
-            PRINTFORML 「손!」
-            PRINTFORML 엉겁결에 내민 손을 마주 잡자 사토리도 당황한것 같다.
-            PRINTFORML 「그게, 그러니까...가만히 듣고 계시는게 저 아이들을 똑 닮아서 저도 모르게...」
-            PRINTFORMW 애완동물 말인가. 그런 플레이도 재밌을것 같다고 생각하자 사토리는 얼굴이 빨개져 붙잡은 손등을 찰싹찰싹 때렸다.
+            SELECTCASE RAND:2
+            CASE 0
+                ;함락 소질이 있을 때
+                PRINTFORML 사토리의 서툴지만 열정적인 지도를 경청했다.
+                PRINTFORML 그러다 사토리가 불쑥 손을 내민다.
+                PRINTFORML 「손!」
+                PRINTFORML 엉겁결에 내민 손을 마주 잡자 사토리도 당황한것 같다.
+                PRINTFORML 「그게, 그러니까...가만히 듣고 계시는게 저 아이들을 똑 닮아서 저도 모르게...」
+                PRINTFORMW 애완동물 말인가. 그런 플레이도 재밌을것 같다고 생각하자 사토리는 얼굴이 빨개져 붙잡은 손등을 찰싹찰싹 때렸다.
+            CASE 1
+                ;연모계
+                PRINTFORML 사토리가 공부 할 때 쓸 이면지라며 종이 뭉치를 건네줬다.
+                PRINTFORML 숫자가 빽뺵히 쓰인건 회계장부인가... 구겨진건 원고지인가?
+                PRINTFORML 「공부 안할거에요?」
+                PRINTFORMW 사토리가 눈을 흘기고 있다.
+            ENDSELECT
         ELSEIF RAND:50 && !CFLAG:1600 ;2% 확률, 1번만
             ;딱 한번?
             PRINTFORML 「흐응... 그 부분은 그렇게 어렵게 생각할 부분이 아니에요.」
@@ -809,7 +818,16 @@ IF LOCAL
             CALL GET_ANGRY(TARGET) ;반발각인은 붙지 않지만 분노치 맥스
         ELSE
             ;일반
-            PRINTFORMW 사토리는 당신이 공부 중 막히거나 잘못 이해한 부분을 읽어 내 가르쳐 주었다.
+            SELECTCASE RAND:2
+            CASE 0
+                PRINTFORMW 사토리는 당신이 공부 중 막히거나 잘못 이해한 부분을 읽어 내 가르쳐 주었다.
+            CASE 1
+                PRINTFORML 사토리가 당신이 손에 든 책을 알아보고 물었다.
+                PRINTFORML 「응? 제 책을 읽어본건가요? 어땠나요?」
+                PRINTFORML 후리가나도 없는데 한자가 많아서 전혀 이해하지 못했다.
+                PRINTFORML 「그럼 오늘은 한자를 공부할까요?」
+                PRINTFORMW 후리가나를 적은 책을 낼 생각은 없는걸까...
+            ENDSELECT
         ENDIF
     ELSEIF GROUPMATCH(ABL:MASTER:교양, ABL:TARGET:교양,(ABL:TARGET:교양 + 1))
         ;교양 3~4 그러니까 사토리와 대등하게 주고 받을 때.
@@ -817,19 +835,35 @@ IF LOCAL
             PRINTFORML 「뻔뻔하게...그럴듯한 말로 자기 변호가 하고 싶을 뿐이잖아.」
             PRINTFORMW 논쟁을 시작한지 얼마 지나지도 않아 의도를 간파당했다...
         ELSEIF TALENT:연인 || TALENT:연모 || TALENT:사모 ; || TALENT:애욕 || TALENT:섹프
-            ;함락 소질이 있을 때
-            PRINTFORML 잠깐 지루해져 농담을 건냈다.
-            PRINTFORML 「"사토리"니까 같이 공부를...? 뭐에요, 정말...」
-            PRINTFORMW 사토리는 당신의 시시한 말장난에 질색했지만, 그 입꼬리엔 미소가 걸려있다.
+            SELECTCASE RAND:2
+            CASE 0
+                ;함락 소질이 있을 때
+                PRINTFORML 잠깐 지루해져 농담을 건냈다.
+                PRINTFORML 「"사토리"니까 같이 공부를...? 뭐에요, 정말...」
+                PRINTFORMW 사토리는 당신의 시시한 말장난에 질색했지만, 그 입꼬리엔 미소가 걸려있다.
+            CASE 1
+                ;연모계
+                PRINTFORML 책상에 있던 사토리의 원고를 읽... 「-지 마요!」
+                PRINTFORML 그럼 스즈나안에 갈거야. 거기선 읽을 수 있겠지.
+                PRINTFORML 「이미 코스즈 양에겐 말해뒀어요. 당신한텐 절-대 보여주지도 말라고.」
+                PRINTFORMW 사토리는 약올리듯 웃고있다...
+            ENDSELECT
         ELSE
-            PRINTFORML 「이 화두에 대해선 어떻게 생각해요? 아, 그럴지도.」
-            PRINTFORMW 질문을 하더니 생각을 읽어버리고 납득한 모양이다.
-            PRINTL
-            PRINTFORML 「커뮤니케이션에선 부호화와 해독이 각 주체마다 한 번씩, 두 번 일어나요.」
-            PRINTFORML 「생각을 말로 표현하고, 말을 이해하고, 이에 다시 생각을 말로, 말을 생각으로...」
-            PRINTFORML 「하지만 말은 생각의 불완전한 재현이에요. 여기서 오해가 생길 수 밖에 없어요.」
-            PRINTFORML 「음... 저는 마음을 읽을 수 있으니까, 그런 오해따윈 할 일이 없다는거에요!」
-            PRINTFORMW 특유의 미소를 띄고 이쪽을 바라보지만, 설명하려다 말이 막혀 급히 자기 자랑으로 마무리 지은것 같다...
+            SELECTCASE RAND:2
+            CASE 0
+                PRINTFORML 「이 화두에 대해선 어떻게 생각해요? 아, 그럴지도.」
+                PRINTFORMW 질문을 하더니 생각을 읽어버리고 납득한 모양이다.
+                PRINTL
+                PRINTFORML 「커뮤니케이션에선 부호화와 해독이 각 주체마다 한 번씩, 두 번 일어나요.」
+                PRINTFORML 「생각을 말로 표현하고, 말을 이해하고, 이에 다시 생각을 말로, 말을 생각으로...」
+                PRINTFORML 「하지만 말은 생각의 불완전한 재현이에요. 여기서 오해가 생길 수 밖에 없어요.」
+                PRINTFORML 「음... 저는 마음을 읽을 수 있으니까, 그런 오해따윈 할 일이 없다는거에요!」
+                PRINTFORMW 특유의 미소를 띄고 이쪽을 바라보지만, 설명하려다 말이 막혀 급히 자기 자랑으로 마무리 지은것 같다...
+            CASE 1
+                PRINTFORML 새로 나온 사토리의 소설에 대해 이야기를 나누다가, 책에 사인을 해달라고 부탁해봤다.
+                PRINTFORML 「후후, 나 이런거 꼭 해보고 싶었어. 고마워요.」
+                PRINTFORMW 많이 연습한것 같은 복잡하고도 귀여운 사인이다...
+            ENDSELECT
         ENDIF
     ELSEIF ABL:MASTER:교양 > ABL:TARGET:교양 ;1 높은 경우는 위에서 이미 처리됨
         ;교양 5 이상 그러니까 사토리를 가르칠 때.
@@ -837,27 +871,59 @@ IF LOCAL
             PRINTFORML 「그런 궤변을 납득할거라고 생각해요?」
             PRINTFORML 그렇지만 논파도 못하지 않았나. 라고 생각하자 이를 악물고 이쪽을 노려본다.
             PRINTFORMW 궤변으로 괴롭힘을 당해 사토리로서 자존심에 상처를 받은것 같다.
+        ELSEIF TALENT:연인 || TALENT:연모 || TALENT:사모
+            ;연모계
+            PRINTFORML 당신은 스즈나안에서 사온 사토리의 신간을 읽었다. 뺏기지 않도록 양손으로 꼭 쥔채로.
+            PRINTFORML 「코이시랑 똑같아... 굳이 내 앞에서 읽어서 괴롭히는게 즐거운거죠?」
+            PRINTFORML 「소감이나 들려줘요. 당신 소감은 조금 궁금하니까...」
+            PRINTFORML 사토리는 초조한지 서드아이를 주물거리고 있다. 마음을 읽지 않으려 안간힘을 쓰고 있는걸지도.
+            PRINTFORML [ 0 ] 좋았다
+            PRINTFORML [ 1 ] 아쉬웠다
+            INPUT
+            SELECTCASE RESULT
+            CASE 0
+                PRINTFORML 치밀하게 짜인 인물과 사건 사이의 관계, 적절하게 사용해 주제의식을 돋보인 모티프. 
+                PRINTFORML 특히 섬세하게 묘사한 감정선은 따라가다 눈물이 났다고 감상을 전했다.
+                PRINTFORML 「다행이다아...으으응...으흐흥....흐흐응...」
+                PRINTFORML 사토리는 얼굴을 손으로 감싼 채 우는듯 웃는듯 이상한 소릴 내고 있다.
+                PRINTFORMW 그럼 이제부턴 원고도 읽... 「-지 마요! 원고는 절-대 안돼!」
+            CASE 1
+                PRINTFORML 섬세한 감정 묘사는 좋지만, 정도가 지나쳐 주제가 흐릿해진 느낌을 받았다고 감상을 전했다.
+                PRINTFORML 「하지만 난 그게 좋아서 소설을 쓰는걸요...」
+                PRINTFORMW 사토리는 조금 토라진 것 같다...
+            ENDSELECT
         ELSE
-            PRINTFORML 「에? 그게 어떻게 그렇게 되는거죠?」
-            PRINTFORMW 생각을 읽어도 부족한지 구체적인 설명을 요구해왔다.
-            IF RAND:5 ;20% 확률
-                ;이어서 가끔
-                PRINTFORML 「흐응...」
-                PRINTFORMW 마음을 읽음에도 한번에 이해하지 못해 자존심이 상하는 모양이다.
-                PRINTL
-                PRINTFORML 「사토리 요괴를 가르치는건...」
-                PRINTFORML 「여러 사람한테 폐 끼치는거라구요?」
-                PRINTFORML 맞는 말이다. 독심술과 궤변으로 남을 괴롭히는게 사토리 요괴의 본질이니까.
-                PRINTFORML 「알고도 그러는건가요? 후후...분명 죽으면 지옥으로 떨어질거에요?」
-                PRINTFORMW 지옥의 관계자가 하는 말이라 농담으로 들리질 않는다...
-                IF TALENT:연인
-                    PRINTFORML 「음...재미 없었나요...」
-                    PRINTFORML 사토리는 풀이 죽어 고개를 숙인채 당신에게 들리지 않을 정도로 중얼거렸다.
-                    PRINTFORMW 「지옥에 떨어지시면... 그럼...」
-                ELSE
-                    PRINTFORMW 사토리는 짖궂은 농담에 당신이 쩔쩔매는 게 즐거운지 기묘한 미소를 띄고 있다.
+            SELECTCASE RAND:2
+            CASE 0
+                PRINTFORML 「에? 그게 어떻게 그렇게 되는거죠?」
+                PRINTFORMW 생각을 읽어도 부족한지 구체적인 설명을 요구해왔다.
+                IF RAND:5 ;20% 확률
+                    ;이어서 가끔
+                    PRINTFORML 「흐응...」
+                    PRINTFORMW 마음을 읽음에도 한번에 이해하지 못해 자존심이 상하는 모양이다.
+                    PRINTL
+                    PRINTFORML 「사토리 요괴를 가르치는건...」
+                    PRINTFORML 「여러 사람한테 폐 끼치는거라구요?」
+                    PRINTFORML 맞는 말이다. 독심술과 궤변으로 남을 괴롭히는게 사토리 요괴의 본질이니까.
+                    PRINTFORML 「알고도 그러는건가요? 후후...분명 죽으면 지옥으로 떨어질거에요?」
+                    PRINTFORMW 지옥의 관계자가 하는 말이라 농담으로 들리질 않는다...
+                    IF TALENT:연인
+                        PRINTFORML 「음...재미 없었나요...」
+                        PRINTFORML 사토리는 풀이 죽어 고개를 숙인채 당신에게 들리지 않을 정도로 중얼거렸다.
+                        PRINTFORMW 「지옥에 떨어지시면... 그럼...」
+                    ELSE
+                        PRINTFORMW 사토리는 짖궂은 농담에 당신이 쩔쩔매는 게 즐거운지 기묘한 미소를 띄고 있다.
+                    ENDIF
                 ENDIF
-            ENDIF
+            CASE 1
+                PRINTFORML 지령전 서재에 공부를 하러 들리자, 사토리가 약간 기대하는 눈초리로 마중을 나왔다.
+                PRINTFORML 「스즈나안에 들렀다 오는 길이죠? 어떤게 가장 잘 팔리던가요?」
+                PRINTFORML 아가사 크리스 Q. 치밀한 구성에 생생한 인물, 능숙한 긴장의 완급 조절에 대단한 반전까지. 인기가 없을수가 없지.
+                PRINTFORML 「음... 제 신간은... 어떻던가요?」
+                PRINTFORML 조심스레 묻는 사토리에게 마니아 층은 있지만 대중적이지는 못한 것 같다고, 코스즈에게 들은대로 전해줬다.
+                PRINTFORML 「으응...아큐 양... 만나는 사람도 많을거고... 환생 준비 때는 염마 밑에서 일하니까 추리 소설은 소재거리가 넘치겠네요... 아아- 부럽네요...」
+                PRINTFORMW 평소보다 한층 더 텐션이 낮아진 사토리가 엄청난 스포일러를 해왔다...
+            ENDSELECT
         ENDIF
     ENDIF
 ENDIF
