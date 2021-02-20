@@ -758,7 +758,7 @@ RETURN 1
 ;==================================================
 ;412,공부
 ;ABL:교양(ABL:MASTER:교양より大=MASTERが教えてもらう ABL:MASTER:교양より小=TARGETが教えてもらう
-;CFLAG:1600 공부 커맨드 특수 출력 유무
+;CFLAG:1600 공부 커맨드 특수 출력 유무, bit연산
 ;==================================================
 @M_KOJO_MESSAGE_COM_K49_412
 CALL TRAIN_MESSAGE
@@ -804,7 +804,7 @@ IF LOCAL
                 PRINTFORML 「공부 안할거에요?」
                 PRINTFORMW 사토리가 눈을 흘기고 있다.
             ENDSELECT
-        ELSEIF RAND:50 && !CFLAG:1600 ;2% 확률, 1번만
+        ELSEIF RAND:50 && !GETBIT(CFLAG:1600, 0) ;2% 확률, 1번만
             ;딱 한번?
             PRINTFORML 「흐응... 그 부분은 그렇게 어렵게 생각할 부분이 아니에요.」
             PRINTFORML 공부가 막히자 생각을 읽은 사토리가 설명을 해주었다.
@@ -816,6 +816,7 @@ IF LOCAL
             PRINTFORML 세 개의 눈이 노려보고 있다.
             PRINTFORMW 실수한것 같다...
             CALL GET_ANGRY(TARGET) ;반발각인은 붙지 않지만 분노치 맥스
+            SETBIT CFLAG:1600, 0
         ELSE
             ;일반
             SELECTCASE RAND:2
